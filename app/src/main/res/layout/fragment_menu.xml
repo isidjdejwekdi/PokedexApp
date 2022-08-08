@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presenter.fragments.MenuFragment">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/favoritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/yellow"
+            android:minWidth="@dimen/menu_button_size"
+            android:text="@string/favorites" />
+
+        <Button
+            android:id="@+id/findByBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_between_element"
+            android:backgroundTint="@color/teal_700"
+            android:minWidth="@dimen/menu_button_size"
+            android:text="@string/find_pokemon" />
+
+        <Button
+            android:id="@+id/findRandomBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_between_element"
+            android:backgroundTint="@color/black"
+            android:minWidth="@dimen/menu_button_size"
+            android:text="@string/find_random" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

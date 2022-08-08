@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_random">Find random pokemon</string>
+    <string name="find_pokemon">Find pokemon</string>
+    <string name="favorites">Favorites list</string>
+    <string name="menu_text_1">Menu text 1</string>
+    <string name="menu_text_2">Menu text 2</string>
+    <string name="menu_text_3">Menu text 3</string>
+
+</resources>
