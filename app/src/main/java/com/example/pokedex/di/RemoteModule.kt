@@ -1,6 +1,6 @@
 package com.example.pokedex.di
 
-import com.example.pokedex.data.remote.PokeApi
+import com.example.pokedex.data.repository.PokeApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -16,7 +16,7 @@ class RemoteModule {
     @Provides
     fun providePokeService(): PokeApi = configureRetrofit()
 
-    private fun configureRetrofit(): PokeApi{ //Dagger
+    private fun configureRetrofit(): PokeApi { //Dagger
         val httpLoggingInterceptor = HttpLoggingInterceptor()//Logging
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 

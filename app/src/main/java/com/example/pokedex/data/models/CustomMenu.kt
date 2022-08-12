@@ -1,4 +1,4 @@
-package com.example.pokedex.data.model
+package com.example.pokedex.data.models
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

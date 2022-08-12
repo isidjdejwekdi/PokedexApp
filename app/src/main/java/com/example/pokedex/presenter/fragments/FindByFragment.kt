@@ -9,17 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.pokedex.R
-import com.example.pokedex.data.model.CustomMenu
 import com.example.pokedex.databinding.FragmentFindByBinding
-import com.example.pokedex.domain.contract.HasCustomMenu
-import com.example.pokedex.domain.contract.HasCustomTitle
-import com.example.pokedex.domain.contract.navigator
 import com.example.pokedex.presenter.MainViewModel
 
-class FindByFragment : Fragment(), HasCustomMenu {
+class FindByFragment : Fragment() {
     private lateinit var binding: FragmentFindByBinding
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -53,7 +48,7 @@ class FindByFragment : Fragment(), HasCustomMenu {
         Toast.makeText(context, "Pokemon ID is arranged in 0 to 100", Toast.LENGTH_LONG).show()
     }
 
-    override fun getCustomMenu(): CustomMenu {
+/*    override fun getCustomMenu(): CustomMenu {
         return CustomMenu(
             textRes = R.string.menu_text_1,
             iconRes = androidx.appcompat.R.drawable.abc_action_bar_item_background_material,
@@ -61,7 +56,7 @@ class FindByFragment : Fragment(), HasCustomMenu {
                 onConfimPressed()
             }
         )
-    }
+    }*/
 
     fun onConfimPressed() {
 

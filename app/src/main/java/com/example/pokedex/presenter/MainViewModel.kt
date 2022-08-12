@@ -2,7 +2,6 @@ package com.example.pokedex.presenter
 
 import android.text.Editable
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,7 @@ class MainViewModel : ViewModel() {
 
     private val resultPokemonMutableLive = MutableLiveData<Int>()
     val resultPokemonLive: LiveData<Int> = resultPokemonMutableLive
+
 
     fun findPokemon(textToFind: Editable) {
         val textStr = textToFind.toString()

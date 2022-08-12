@@ -1,13 +1,8 @@
 package com.example.pokedex.presenter
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -15,16 +10,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.pokedex.R
 import com.example.pokedex.app.appComponent
-import com.example.pokedex.data.model.CustomMenu
-import com.example.pokedex.data.remote.PokeApi
+import com.example.pokedex.data.repository.PokeApi
 import com.example.pokedex.databinding.ActivityMainBinding
-import com.example.pokedex.domain.contract.HasCustomMenu
-import com.example.pokedex.domain.contract.HasCustomTitle
-import com.example.pokedex.domain.contract.Navigator
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val compositeDisposable = CompositeDisposable()
     private val currentFragment: Fragment
@@ -50,15 +41,17 @@ class MainActivity : AppCompatActivity(), Navigator {
         vm = ViewModelProvider(this).get(MainViewModel::class.java)
 
         appComponent.inject(this)
-/*        compositeDisposable.add(
-            pokeService.getAnyPokemon()
+        /*compositeDisposable.add(
+            pokeService.getPokemonByName("pikachu")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
 
-                    Toast.makeText(this, it.name, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+                    Log.e(TAG, it.toString())
+
                 }, {
-                    Log.e("TAG", "ERROR")
+                    Log.e(TAG, "ERROR")
                 })
         )*/
     }
@@ -111,44 +104,28 @@ class MainActivity : AppCompatActivity(), Navigator {
         }
     }*/
 
-    override fun goBack() {
-        onBackPressed()
-    }
-
-    override fun showPokemonFindScreen() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showGetAnyPokemonScreen() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showFavoritesScreen() {
-        TODO("Not yet implemented")
-    }
-
-    override fun goToMenu() {
-        TODO("Not yet implemented")
-    }
-
     override fun onResume() {
-        Log.e("AAA", "onResume")
+        Log.e(TAG, "onResume")
         super.onResume()
     }
 
     override fun onPause() {
-        Log.e("AAA", "onPause")
+        Log.e(TAG, "onPause")
         super.onPause()
     }
 
     override fun onStop() {
-        Log.e("AAA", "onStop")
+        Log.e(TAG, "onStop")
         super.onStop()
     }
 
     override fun onDestroy() {
-        Log.e("AAA", "onDestroy")
+        Log.e(TAG, "onDestroy")
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+    companion object{
+        private const val TAG = "AAA"
     }
 }

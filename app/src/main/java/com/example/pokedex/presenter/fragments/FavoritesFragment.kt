@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentFavoritesBinding
-import com.example.pokedex.domain.contract.HasCustomMenu
-import com.example.pokedex.domain.contract.HasCustomTitle
 
 class FavoritesFragment : Fragment() {
     private lateinit var binding: FragmentFavoritesBinding
