@@ -5,6 +5,7 @@
     android:id="@+id/my_nav"
     app:startDestination="@id/menuFragment">
 
+
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.pokedex.presenter.fragments.MenuFragment"
@@ -12,8 +13,7 @@
         tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/actionMenuToFindBy"
-            app:destination="@id/findByFragment"
-            />
+            app:destination="@id/findByFragment" />
         <action
             android:id="@+id/actionMenuToFindRandom"
             app:destination="@id/findRandomFragment" />
@@ -30,7 +30,7 @@
             android:id="@+id/actionFindByToMenu"
             app:destination="@id/menuFragment"
             app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/findRandomFragment"
@@ -41,8 +41,7 @@
             android:id="@+id/actionFindRandomToMenu"
             app:destination="@id/menuFragment"
             app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -54,10 +53,11 @@
             android:id="@+id/actionFavoritesToMenu"
             app:destination="@id/menuFragment"
             app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <action
         android:id="@+id/action_global_favoritesFragment"
         app:destination="@id/favoritesFragment" />
+
 
 </navigation>

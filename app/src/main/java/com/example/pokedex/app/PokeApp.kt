@@ -2,6 +2,7 @@ package com.example.pokedex.app
 
 import android.app.Application
 import android.content.Context
+import com.example.pokedex.data.repository.PokeRepositoryImpl
 import com.example.pokedex.di.AppComponent
 import com.example.pokedex.di.DaggerAppComponent
 
@@ -12,7 +13,6 @@ class PokeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         initializeDagger()
     }
 

@@ -1,22 +1,17 @@
 package com.example.pokedex.data.storage
 
-import com.example.pokedex.domain.models.Pokemon
-import com.example.pokedex.domain.repository.PokeRepository
+import android.content.Context
+import android.text.Editable
+import android.util.Log
+import com.example.pokedex.data.repository.PokeApi
+import javax.inject.Inject
+import com.example.pokedex.app.appComponent
+import com.example.pokedex.presenter.MainViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import java.lang.NumberFormatException
 
-class DBStorage() : PokeRepository {
-    override fun getPokemonByName(name: String): Pokemon {
-        TODO("Not yet implemented")
-    }
+class DBStorage(private val context: Context) {
 
-    override fun getPokemonById(id: Int): Pokemon {
-        TODO("Not yet implemented")
-    }
-
-    override fun savePokemon(pokemonModel: Pokemon) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getSavedPokemon(): List<Pokemon> {
-        TODO("Not yet implemented")
-    }
 }

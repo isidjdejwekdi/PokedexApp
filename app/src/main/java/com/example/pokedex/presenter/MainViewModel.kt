@@ -1,61 +1,60 @@
 package com.example.pokedex.presenter
 
-import android.text.Editable
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import java.lang.NumberFormatException
+import com.example.pokedex.data.remote.NetworkService
+import com.example.pokedex.data.repository.PokeRepositoryImpl
+import com.example.pokedex.data.storage.DBStorage
+import com.example.pokedex.domain.models.Pokemon
+import com.example.pokedex.domain.usecase.FetchPokemonByNameOrIdUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val app: Application) : AndroidViewModel(app) {
 
-    private val resultPokemonMutableLive = MutableLiveData<Int>()
-    val resultPokemonLive: LiveData<Int> = resultPokemonMutableLive
+    private var componentDisposable = CompositeDisposable()
+    private var resultPokemonMutableLive = MutableLiveData<Pokemon>()//TODO var -> val
+    val resultPokemonLive: LiveData<Pokemon> = resultPokemonMutableLive
 
+    private val networkService: NetworkService = NetworkService(app.applicationContext)
+    private val dbStorage: DBStorage = DBStorage(app.applicationContext)
+    private val pokeRepositoryImpl = PokeRepositoryImpl(
+        dbStorage = dbStorage,
+        networkService = networkService
+    )
+    private val fetchPokemonByNameOrIdUseCase = FetchPokemonByNameOrIdUseCase(
+        pokeRepository = pokeRepositoryImpl
+    )
 
-    fun findPokemon(textToFind: Editable) {
-        val textStr = textToFind.toString()
-        if (isNumber(textStr)) {    //is text a number
-            val textInt = textStr.toInt()
-            if (isNumberOfPokemon(textInt)) //is number is in the range
-                fetchPokemonByID(textInt)
-            else showIncorrectIdDialog()    //id is not in range
-        } else {
-            fetchPokemonByName(textStr)
-        }
+    fun findBtnPressed(p: String) {
+        findPokemon(p)
+    }
 
+    private fun findPokemon(pokemonNameOrId: String) {
+        val dispose = fetchPokemonByNameOrIdUseCase.execute(pokemonNameOrId)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                resultPokemonMutableLive.value = it
+            }, {
+
+            })
+        componentDisposable.add(dispose)
     }
 
     private fun showIncorrectIdDialog() {
-        Log.e(TAG, "Pokemon ID is arranged in $MIN_POKEMON_ID to $MAX_POKEMON_ID")
+        Log.e(
+            TAG,
+            "Pokemon ID is arranged in ${NetworkService.MIN_POKEMON_ID} to ${NetworkService.MAX_POKEMON_ID}"
+        )
     }
 
     private fun showIncorrectNameDialog() {
         Log.e(TAG, "Such pokemon does not exist")
-    }
-
-    private fun fetchPokemonByID(id: Int) {
-        //TODO fetch
-        Log.e(TAG, "fetch pokemon with id = $id")
-    }
-
-    private fun fetchPokemonByName(name: String) {
-        //TODO fetch
-        Log.e(TAG, "fetch pokemon with name = $name")
-    }
-
-    private fun isNumber(textToFind: String): Boolean {
-        return try {
-            textToFind.toInt()
-            true
-        } catch (ex: NumberFormatException) {
-            false
-        }
-    }
-
-    private fun isNumberOfPokemon(textInt: Int): Boolean {
-
-        return textInt in MIN_POKEMON_ID..MAX_POKEMON_ID
     }
 
     fun findRandomPokemon() {
@@ -71,14 +70,12 @@ class MainViewModel : ViewModel() {
     }
 
     companion object {
-        const val MIN_POKEMON_ID = 0
-        const val MAX_POKEMON_ID = 100
         const val TAG = "ViewModel"
-        //TODO change min and max id constants to correct id
     }
 
     override fun onCleared() {
         Log.e("AAA", "VM Cleared")
+        componentDisposable.dispose()
         super.onCleared()
     }
 
