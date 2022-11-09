@@ -7,8 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="yellow">#CA8622</color>
+    <color name="yellow">#F0DAAA31</color>
     <color name="darkGray">#BC3F4343</color>
     <color name="translucent">#12000000</color>
-
+    <color name="border_color">#CDE49445</color>
+    <color name="border_color_items">#D81A1A1A</color>
+    <color name="blue">#BF3574AC</color>
+    <color name="bluew">#A92B2437</color>
+    <color name="gray1">#2C2C2C</color>
+    <color name="gray2">#202020</color>
 </resources>

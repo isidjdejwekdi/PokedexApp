@@ -1,44 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="500dp"
     android:orientation="vertical"
-    android:weightSum="10">
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_star_border_100"
-        android:layout_weight="0.7"
-        android:layout_gravity="end"/>
+    android:weightSum="10"
+    android:background="@drawable/border_pokemon_card"
+    >
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="4"
+        >
 
-        <TextView
-            android:id="@+id/tv_name"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical"
+
+            >
+            <TextView
+                android:background="@drawable/border_items"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="@dimen/border_width"
+                android:id="@+id/tv_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/name"
+                android:textSize="@dimen/items_text_size_info" />
+            <TextView
+                android:layout_marginStart="@dimen/border_width"
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/items_text_size"
+                android:background="@drawable/border_items_1"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="name"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:orientation="vertical"
 
-        <TextView
-            android:id="@+id/tv_id"
+            >
+            <TextView
+                android:layout_marginTop="@dimen/border_width"
+                android:background="@drawable/border_items"
+                android:id="@+id/tv_id_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/id"
+                android:textSize="@dimen/items_text_size_info" />
+            <TextView
+                android:id="@+id/tv_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/items_text_size"
+                android:background="@drawable/border_items_1"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ImageView
+            android:id="@+id/iv_star"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_star_border_100"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="id"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:background="?android:selectableItemBackground"
+            />
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -46,7 +94,8 @@
         android:id="@+id/iv_pokemon_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6" />
+        android:layout_weight="6"
+        android:background="@drawable/border_image"/>
 
     <TextView
         android:id="@+id/tv_abilities"

@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     /*private val currentFragment: Fragment
         get() = supportFragmentManager.findFragmentById(R.id.navHost_fragment_container)!!*/
     private lateinit var vm: MainViewModel
-
     private lateinit var navController: NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Pokedex)
@@ -40,9 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController)
         vm = ViewModelProvider(this).get(MainViewModel::class.java)
-        vm.resultPokemonLive.observe(this) {
-            Log.e(MainViewModel.TAG, it.toString())
-        }
 
         appComponent.inject(this)
 

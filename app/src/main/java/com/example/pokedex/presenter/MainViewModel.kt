@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.pokedex.data.remote.NetworkService
 import com.example.pokedex.data.repository.PokeRepositoryImpl
 import com.example.pokedex.data.storage.DBStorage
+import com.example.pokedex.data.utils.SingleLiveEvent
 import com.example.pokedex.domain.models.Pokemon
 import com.example.pokedex.domain.usecase.FetchPokemonByNameOrIdUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,8 +18,9 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel(val app: Application) : AndroidViewModel(app) {
 
     private var componentDisposable = CompositeDisposable()
-    private var resultPokemonMutableLive = MutableLiveData<Pokemon>()//TODO var -> val
-    val resultPokemonLive: LiveData<Pokemon> = resultPokemonMutableLive
+   /* private var resultPokemonMutableLive = MutableLiveData<Pokemon>()//TODO var -> val?
+    val resultPokemonLive: LiveData<Pokemon> = resultPokemonMutableLive*/
+    val resultPokemonMutableLive: MutableLiveData<Pokemon> = SingleLiveEvent<Pokemon>()
 
     private val networkService: NetworkService = NetworkService(app.applicationContext)
     private val dbStorage: DBStorage = DBStorage(app.applicationContext)
@@ -40,6 +42,7 @@ class MainViewModel(val app: Application) : AndroidViewModel(app) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 resultPokemonMutableLive.value = it
+                Log.e(TAG, "LIVEDATA CHANGED")
             }, {
 
             })

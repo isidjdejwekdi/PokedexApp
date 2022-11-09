@@ -9,14 +9,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentFindByBinding
+import com.example.pokedex.domain.models.Pokemon
 import com.example.pokedex.presenter.MainViewModel
-import com.squareup.picasso.Picasso
 
 class FindByFragment : Fragment() {
     private lateinit var binding: FragmentFindByBinding
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var pokemonName: String
+    private  val fetchObserver = Observer<Pokemon> {
+        val dialogPokemon = PokemonCard()
+        dialogPokemon.show(parentFragmentManager, "po")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e("AAAfind", "onCreate")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,52 +36,25 @@ class FindByFragment : Fragment() {
     ): View? {
         binding = FragmentFindByBinding.inflate(inflater, container, false)
 
-        pokemonName = binding.findTextView.text.toString()
+        binding.findBtn.setOnClickListener() {
+            pokemonName = binding.findTextView.text.toString()
+            if (pokemonName != "")
+                viewModel.findBtnPressed(pokemonName)
+
+        }
+
+        viewModel.resultPokemonMutableLive.observe(viewLifecycleOwner, fetchObserver)
 
         Log.e("AAAfind", "onCreateView");
+        Log.e("BACK", parentFragmentManager.backStackEntryCount.toString())
+
+
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.findBtn.setOnClickListener {
-            if (binding.findTextView.text.toString() != "") {
-                viewModel.findBtnPressed(binding.findTextView.text.toString())
-            }
-        }
-
-        viewModel.resultPokemonLive.observe(requireActivity()) {
-            binding.testTv.text = it.toString()
-
-            val svgImage = it.sprites.other.dream_world.front_default
-            val pngImage = it.sprites.front_shiny
-            val art = it.sprites.other.artwork.front_default
-            Log.e("Observe", "$art ")
-
-            Picasso.get().load(art).into(binding.image)
-
-            //TODO refresh recyclerView (adapter)
-        }
-    }
-
     private fun shoUpIfoDialog() {
         Toast.makeText(context, "Pokemon ID is arranged in 0 to 100", Toast.LENGTH_LONG).show()
-    }
-
-/*    override fun getCustomMenu(): CustomMenu {
-        return CustomMenu(
-            textRes = R.string.menu_text_1,
-            iconRes = androidx.appcompat.R.drawable.abc_action_bar_item_background_material,
-            onCustomAction = Runnable {
-                onConfimPressed()
-            }
-        )
-    }*/
-
-    fun onConfirmPressed() {
-
     }
 
     override fun onAttach(context: Context) {
@@ -77,10 +62,6 @@ class FindByFragment : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("AAAfind", "onCreate")
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onDetach() {
         Log.e("AAAfind", "onDetach")
@@ -88,8 +69,9 @@ class FindByFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        Log.e("AAAfind", "onDestroyView")
         super.onDestroyView()
+        Log.e("AAAfind", "onDestroyView")
+        viewModel.resultPokemonMutableLive.removeObserver(fetchObserver)
     }
 
     override fun onDestroy() {

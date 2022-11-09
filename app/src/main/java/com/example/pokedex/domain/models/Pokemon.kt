@@ -12,6 +12,7 @@ class Pokemon(
     override fun toString(): String {
         return "Pokemon: name = $name, id = $id, abilities: ${abilities.toList()}"
     }
+
 }
 data class AbilityExtra(val ability: Ability, val is_hidden: Boolean, val slot: Int){
     override fun toString(): String {

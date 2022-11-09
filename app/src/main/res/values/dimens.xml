@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="side_margin">16dp</dimen>
     <dimen name="menu_button_size">240dp</dimen>
     <dimen name="margin_between_element">8dp</dimen>
     <dimen name="splash_text_size">20sp</dimen>
+
+    <dimen name="items_text_size"> 23sp</dimen>
+    <dimen name="items_text_size_info"> 15sp</dimen>
+
+    <dimen name="card_width"> 300dp</dimen>
+    <dimen name="card_height"> 600dp</dimen>
+
+    <dimen name="border_radius">15dp</dimen>
+    <dimen name="border_radius_items">10dp</dimen>
+
+    <dimen name="border_width"> 2dp</dimen>
+    <dimen name="border_width_items"> 5dp</dimen>
+    <dimen name="border_width_items_1"> 3dp</dimen>
 
 </resources>
